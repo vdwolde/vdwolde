@@ -64,8 +64,15 @@ This checklist covers React-specific concerns only. Generic TypeScript concerns 
 
 - **Form without semantic `<form>` element**: Loses native submit-on-Enter, browser form integration, accessibility tree.
 - **`onSubmit` without `preventDefault()`**: Page navigates, state lost (unless using React 19 form actions, which handle it).
-- **Roll-your-own validation in non-trivial form**: Recommend React Hook Form, TanStack Form, or React 19 `useActionState`.
+- **Roll-your-own validation in non-trivial form**: First the platform: HTML constraints (`required`, `type`, `pattern`, `minLength`) with `:user-invalid` styling cover basic rules with no library. Beyond that, React 19 `useActionState`; a form library (React Hook Form, TanStack Form) only if the project already has one, since a new dependency is the owner's call.
 - **Missing `name` attribute on inputs inside a form**: Cannot be read via `FormData`.
+- **Hand-kept "touched" state or bare `:invalid` for error styling**: Use `:user-invalid` (Tailwind `user-invalid:`). Keep `aria-invalid` and `aria-describedby` in step with it.
+- **Credential, address or payment input without `autoComplete`, or with `autoComplete="off"`**: Name the token (`current-password`, `new-password`, `email`, `one-time-code`, `street-address`).
+- **`onKeyDown` that acts on Enter without an IME check**: `if (e.nativeEvent.isComposing || e.keyCode === 229) return;` before submitting.
+
+### MEDIUM -- Platform before library (web)
+
+- **Legacy web pattern with a native replacement**: Walk `~/.claude/agents/references/platform-native.md` § Legacy web patterns over the JSX and CSS. Name the replacement and, for a feature newer than the project's browser target, its fallback. A shadcn/Base UI primitive is the project's standard, never a "use native `<dialog>`" finding.
 
 ### MEDIUM -- Composition
 

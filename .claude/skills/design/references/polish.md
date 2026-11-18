@@ -61,7 +61,8 @@ format of verify.md § 4.
 
 **Then the craft pass.** Run the geometry audit (verify.md § 2 step 10) at each width and in dark mode, read each
 candidate against its screenshot, and walk [craft-checks.md](craft-checks.md): the spacing, alignment, type, icon,
-colour and hierarchy details, each with the number and the fix. Report what fits and is wrong in the same
+colour and hierarchy details, each with the number and the fix, and its § 7, the Unslop sign list
+([unslop/signs.md](unslop/signs.md); fixes land in [unslop/passes.md](unslop/passes.md)'s pass order). Report what fits and is wrong in the same
 finding format; unless this is an `audit`, fix them (Phase 7 is where the small ones land). `save findings` again
 after it. **Whole-app scope, and not an `audit` unless asked:** finish with the fresh-eye review of [review.md](review.md)
 on the two or three screens that matter most, and fold its ranked list into the findings. A diff-scope pass or

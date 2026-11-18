@@ -11,7 +11,7 @@ read-only subagent of the pass, not `/code`, `/code-review` or `/security-review
 |---|---|
 | `create`, key screen | On: the first screen, before the rest are built |
 | `polish`, whole app | On: the two or three screens that matter most |
-| `polish` on a diff, `improve`, `overhaul`, `audit` | Off, and say so in one line; on when the user asks |
+| `polish` on a diff, `improve`, `overhaul`, `audit` | Off, and say so in one line; on when the user asks ("unslop", "looks AI-generated" counts as asking) |
 
 Cost: one subagent, a handful of images. Do not repeat it after every fix; run it once after the fixes from the
 geometry audit, and again only if the first review found a structural problem.
@@ -26,6 +26,8 @@ geometry audit, and again only if the first review found a structural problem.
    and `-light.png` (a vdWolde project), or the user's reference screenshot. Same scale as the new ones.
 3. The Design Read line and, if it exists, `.claude/DESIGN.md`. **Nothing else**: not your plan, not why you did
    it, not the audit report.
+4. The sign list as vocabulary, not as findings: [unslop/signs.md](unslop/signs.md), and in a vdWolde project
+   [unslop/conflicts.md](unslop/conflicts.md) so the brand's own backlight, mark and signal are not sent back.
 
 ## The brief
 
@@ -40,6 +42,9 @@ line, DESIGN.md), the scope lock (read only; change nothing), the output contrac
 > Your first question, before any checklist: does this composition answer this product and this audience, or
 > could it be any product in its category? A layout the brief did not shape is a finding even when nothing
 > else is wrong.
+>
+> Then walk the sign list (signs.md): every sign you can see in a picture is a finding, named by its ID (`C2 gradient
+> text`). conflicts.md lists what the brand does on purpose; those are not findings.
 >
 > Then: put each screen beside its reference (if any) and name the one difference. Squint: what does the eye
 > land on first, and is it the thing the screen is for?
@@ -57,6 +62,8 @@ line, DESIGN.md), the scope lock (read only; change nothing), the output contrac
 ## Use the answer
 
 - Treat each line as a candidate, like the audit's. Look at the image it points at before you act.
+- Sign findings (an ID from signs.md) are fixed in the pass order of [unslop/passes.md](unslop/passes.md) and
+  [craft-checks.md](craft-checks.md) § 7, never one by one in the order they came back.
 - Fix the largest first. A structural finding (the eye lands on the wrong thing, the screen could be any
   product) outranks any spacing fix and may change the plan, not only the CSS.
 - A line you think is intentional is not settled: look at the picture again. If it still looks right, say so

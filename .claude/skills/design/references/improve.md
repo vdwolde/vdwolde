@@ -76,6 +76,8 @@ Do not silently widen the pass and do not silently refuse.
 - [ ] Look at the screens in scope ([verify.md](verify.md)) and compare with the "before" screenshots, one
   beside the other at the same scale: say the one difference, and check the squint test (what does the eye land
   on first, and is it what the screen is for?). Run the geometry audit (verify.md § 2 step 10) on what changed.
+- [ ] No dial added a sign from [unslop/signs.md](unslop/signs.md) (a `bolder` that reached for a glow, a gradient
+  headline or 800-weight type; an `overdrive` that loops): run its patterns over the changed files.
 - [ ] List every token and value changed, old → new. This is the diff the user reviews.
 - [ ] The four locked fingerprint lines are unchanged (or amended, with the changelog line).
 - [ ] Reduced-motion still collapses all motion. No new infinite loops.

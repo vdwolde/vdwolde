@@ -17,6 +17,14 @@ changed lines, one `review-reader` carries the lens files in turn (the fast path
    (`known-token-shape`, `hardcoded-secret`, `shell-exec`, `sql-concat`, `dynamic-eval`, `tracked-env-file`),
    do not investigate them here: list them at the end of the report and suggest `/code security`.
 
+## Web front ends
+
+When the scope holds HTML, CSS or client-side JS, say so in the `design` lens brief: it then walks
+`~/.claude/agents/references/platform-native.md` § Legacy web patterns and reports each legacy pattern with the
+modern replacement named (and the fallback, when the feature is newer than the project's browser target, which
+is Baseline Widely available unless `.claude/STACK.md` says otherwise). Pass the project's browser-support line
+if it has one.
+
 ## Architecture
 
 On `--all`, or changes spanning many modules, tell the `design` lens to run its **Architecture** section over

@@ -71,12 +71,16 @@ Build from the chosen direction's catalog rows. Never invent values.
 ## Phase 5 — Build, one screen first
 
 1. Build the **single most important screen** from the tokens. Read the stack CSV first and reuse what
-   exists (the shadcn component before a hand-built one).
+   exists (the shadcn component before a hand-built one). On a web surface, read
+   `~/.claude/agents/references/modern-web.md` before writing markup, CSS or client-side JS: it names the
+   platform feature to use (overlays, forms and validation, image priority, colour scheme, motion) and the
+   fallback a feature newer than Baseline Widely available needs. The house style still owns every visual value.
 2. **Look at it** ([verify.md](verify.md) § 2, or ask for a screenshot on desktop). Fix the system now.
 3. Build the rest. With more than four screens left, fan out to at most three parallel subagents (the
    parent's model). Each brief carries the token file path, the component list, the content brief and its
    target files, **and names what the agent must read before it builds: SKILL.md Step 3 (the anti-defaults),
-   [craft-checks.md](craft-checks.md) and the house style's `SPEC.md` when one applies** (a builder that does not
+   [craft-checks.md](craft-checks.md), [unslop/signs.md](unslop/signs.md) (with `unslop/conflicts.md` in a vdWolde
+   project) and the house style's `SPEC.md` when one applies** (a builder that does not
    know them repeats the habits they forbid); each returns only file paths and one line. Register each screen as an item (`add --group
    screens`) and `done` it when its file exists and the gate passes; a limit-error reply is not a result:
    `fail` it, stop spawning, and a resume spawns agents only for the screens still pending. Each brief says to

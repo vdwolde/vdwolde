@@ -1,6 +1,6 @@
 ---
 name: design
-description: Frontend and UI design in four modes — create (new design, new screen, or a system extension such as dark mode), overhaul (three different design directions on a Claude canvas to choose from), improve (keep the look, make it bolder, quieter or richer), polish (consistency, audit, harden, optimize, document). Web, Windows desktop (WPF, WinUI, Avalonia) and tray utilities. Named house styles win over keyword matching: vdWolde (Brand Guide v1.1) is the DEFAULT for every project in this base and needs no name; Liquid Glass and its aliases glassmorphism 2.0, gel glass apply only when named. Use when: design a UI, new screen, add dark mode, redesign, different look, make it bolder, make it quieter, improve the design, polish, audit or review the design, pick a palette, choose fonts, vdWolde brand, Liquid Glass, in Liquid Glass, Liquid Glass look, named house style.
+description: Frontend and UI design in four modes — create (new design, new screen, or a system extension such as dark mode), overhaul (three different design directions on a Claude canvas to choose from), improve (keep the look, make it bolder, quieter or richer), polish (consistency, audit, harden, optimize, document). Web, Windows desktop (WPF, WinUI, Avalonia) and tray utilities. Named house styles win over keyword matching: vdWolde (Brand Guide v1.1) is the DEFAULT for every project in this base and needs no name; Liquid Glass and its aliases glassmorphism 2.0, gel glass apply only when named. Use when: design a UI, new screen, add dark mode, redesign, different look, make it bolder, make it quieter, improve the design, polish, audit or review the design, pick a palette, choose fonts, vdWolde brand, Liquid Glass, in Liquid Glass, Liquid Glass look, named house style, unslop, looks AI-generated, vibecoded.
 ---
 
 # /design
@@ -22,6 +22,8 @@ web *and* Windows desktop UI.
 `<site>`" → create. "Redesign", "refresh", "I hate this look", "show me options" → overhaul. "Bolder",
 "quieter", "change the accent to teal", "tighten the spacing", "redesign this button" → improve. "Tidy up",
 "make it consistent", "ready to ship", "review my UI" → polish ("review" and "audit" mean report only).
+"Unslop", "looks AI-generated", "vibecoded" → polish, run as [unslop/passes.md](references/unslop/passes.md) says
+(audit, stop with the signs, then the nine passes); a request for a new look on top of that is overhaul.
 **If it is vague** ("make it better", "design this"), ask once with `AskUserQuestion`: the four modes as
 the options, each "use it when" line as its description. Never guess a mode for a vague request and never
 run several on one request; two modes run in sequence, each with its own Design Read.
@@ -106,7 +108,9 @@ every object has the same weight in the same bordered card · cards inside cards
 hero outlined with an accent ring to point at it · a dot or badge beside a label that means nothing · an
 invented logo (a letter in a coloured square beside a real company's name) · tracked caps on every heading and
 label · 9 to 10 px text to fit more in · metadata on every row so that every row is the subject · a glow or
-gradient that serves nothing. The checks for these live in [craft-checks.md](references/craft-checks.md)
+gradient that serves nothing. The checks for these live in [craft-checks.md](references/craft-checks.md); the full
+sign list, with a search pattern per sign and the order to fix them in, is [references/unslop/](references/unslop/README.md)
+(harvested from Unslop, CC BY 4.0; the Brand Guide wins, see its `conflicts.md`)
 
 ## Step 4 — Use the catalog
 
@@ -136,12 +140,17 @@ command menu, hit targets, safe area, idempotency and more) to check, report and
 and 11) and `polish` (Phases 4 and 7) also read [craft-checks.md](references/craft-checks.md): the spacing,
 alignment, type, icon, colour and hierarchy details a careful designer sends back, with numbers and the audit
 check that finds each. `polish` (Phases 5 and 6) and `create` (Phase 7) read
-[motion-checks.md](references/motion-checks.md): the quality of motion that exists. `create` (Phase 11) and a
+[motion-checks.md](references/motion-checks.md): the quality of motion that exists. `create`, `improve` and `polish`
+read [unslop/signs.md](references/unslop/signs.md) and [unslop/passes.md](references/unslop/passes.md) (plus
+`conflicts.md` in a vdWolde project): `create` builds against the sign list, `improve` keeps a dial from adding a sign,
+`polish` audits against it and fixes in its pass order ([craft-checks.md](references/craft-checks.md) § 7). `create` (Phase 11) and a
 whole-app `polish` (Phase 4) end with [review.md](references/review.md): a fresh-eye reviewer who sees only
 screenshots. Each playbook skips phases that do not apply and says so in one line.
 
 **Helper:** `node ~/.claude/skills/design/tools/design-tools.mjs` (`contrast`, `oklch`, `hex`, `ramp`,
-`retint`, `inventory`) does the maths a model gets wrong. Use it, never an estimate. It only reads and prints.
+`retint`, `inventory`) does the maths a model gets wrong. Use it, never an estimate. It only reads and prints,
+except `snapshot` (a page as one HTML file plus a `.live.png`; before and after shots into the project's `.state/`)
+and `story` (the before-to-after video, [unslop/story.md](references/unslop/story.md)), which need Playwright.
 Three browser-side scripts run through chrome-devtools `evaluate_script` (`sourcePath`): `tools/ui-audit.js`
 (geometry: insets, clipping, uneven padding, rows, icons, targets; verify.md § 2 step 10),
 `tools/motion-probe.js` (animations, jumps, pops, anchor drift; step 11) and `tools/contrast-probe.js` (the text

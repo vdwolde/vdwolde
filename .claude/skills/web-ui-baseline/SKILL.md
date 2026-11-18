@@ -65,6 +65,18 @@ sentence" rule by this section existing.
   Generate the clean token block in a scratch project first, then hand-merge it into a real
   project with existing styles.
 
+## Platform features around the components
+
+shadcn/Base UI owns the overlay and control primitives (dialog, popover, menu, select, tooltip, tabs): never
+swap one for a native `<dialog>` or `popover`, and never hand-roll one. Everything around them is the web
+platform's job, and the rules for it live in `~/.claude/agents/references/modern-web.md` (read it before writing
+markup, CSS or client-side JS; not loaded up front): form constraints and `:user-invalid` instead of a
+validation library for basic rules, `autocomplete`/`inputmode` on every field, LCP image priority, `@layer` and
+`:has()` instead of JS class toggles, `color-scheme` kept in step with the `.dark` class, reduced motion, and the
+browser-support rule (Baseline Widely available needs no fallback; anything newer ships with the fallback that
+file names). The same file applies unchanged to a non-React web project, where its overlay recipes
+(`<dialog>`, `popover`) are the primitive.
+
 **Rejected:** keeping the `nextjs-web` archetype's three-tier token grammar and layering shadcn's
 roles on top of it as Tier 2 (rejected — two token systems doing the same job is the opposite of
 the simplicity ladder, and every `shadcn add` afterward would need manual re-mapping forever);

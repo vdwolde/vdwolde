@@ -31,7 +31,13 @@ fields it needs), large objects copied on every call.
 demand (editors, charts below the fold, export libraries), a vendor bundle that changes every deploy, images
 without dimensions or in an old format, render-blocking assets, missing compression, hashed assets without
 `immutable` and an HTML entry without `no-cache`, animation that is not compositor-only (`transform` and
-`opacity`), unnecessary re-renders, long lists without virtualization.
+`opacity`), unnecessary re-renders, long lists without virtualization. Loading priority: the LCP image
+lazy-loaded, absent from the server HTML or without a priority hint (`fetchpriority="high"`, `priority` on
+`next/image`); more than two high-priority images; `srcset` without `sizes`; a CSS `@import` chain; a
+parser-blocking script in `<head>`; `content-visibility: auto` without `contain-intrinsic-size`, or on a small
+page; `Cache-Control: no-store` on a page that holds nothing private (it disables the back/forward cache). Name
+the replacement from `~/.claude/agents/references/platform-native.md` § Legacy web patterns; these are
+"likely" until a trace shows the cost.
 
 **Desktop (static pass, no running app needed).** Large lists not virtualised (`VirtualizingStackPanel`),
 brushes and geometries not frozen (`Freeze()`), `DropShadowEffect` or other effects on large or animated areas,

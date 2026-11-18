@@ -110,6 +110,37 @@ are left out on purpose.
 | 50 | A narrow layout is a second design: crop closer, stack, drop secondary anatomy; keep the action and the result whole. A desktop screen scaled into a phone passes the overflow check while its text becomes unreadable | `small-text` at 390 / 320, `page-overflow`, `words-cut` | Same layout, smaller type | A real small-width layout; text stays at native size, at least 10 px at 320 |
 | 51 | A popover, menu or dialog keeps a gutter of at least 16 px from the edge of the visible area, and fits before its first frame | `overlay-room` | A menu against the screen edge | Placement with collision padding |
 
+## 7. Signs of slop (Unslop)
+
+The screen-level tells of generated UI, from [unslop/signs.md](unslop/signs.md). The groups above catch geometry;
+this one catches the look. **In a vdWolde project read [unslop/conflicts.md](unslop/conflicts.md) first**: the
+brand's backlight, mark, signal, Title Case and token values are not findings.
+
+1. **Find.** Run each "Find it" pattern from signs.md with `Grep` over the UI source in scope (never vendored
+   `components/ui/*`, `node_modules` or generated files), then walk the screenshots for the "eye" rows. A hit is a
+   candidate: read the line and look at where it renders.
+2. **Report** as `path:line — <ID> <sign> — severity — fix`. **High:** a sign on the first screen or the primary
+   action (C1, C2, C3, I1, W1, L4, V1, M1). **Medium:** visible on a frequent screen. **Low:** otherwise.
+3. **Fix in the pass order** of [unslop/passes.md](unslop/passes.md), each pass across the whole scope before the
+   next, with the project's gate after each: spacing, colour, icons, copy, type, layout, details, visuals, motion.
+   RTL first when the screen is right to left.
+
+| Pass | Sign IDs | Caught by | Fix with |
+|---|---|---|---|
+| RTL (first, only for RTL screens) | R1 R2 R3 R4 R5 R6 R7 R8 R9 R10 R11 | Patterns in signs.md, eye | [unslop/rtl.md](unslop/rtl.md) |
+| 1. Spacing | S1 S2 S3 S4 S5 | S1 pattern + `inventory`; `audit: fat-row, loose-list, uneven-padding, uneven-inset`; rules 2, 3, 4, 17 above | The brand or project spacing scale |
+| 2. Colour | C1 C2 C3 C4 C5 C6 C7 C8 | Patterns; `inventory` clusters for C6; § 4 above | One neutral ramp, one accent (brand: the signal; X1, X2, X5) |
+| 3. Icons | I1 I2 I3 I4 I5 | Emoji pattern; `audit: icons`; § 3 above | One set, one size and stroke; status keeps icon and word (X10) |
+| 4. Copy | W1 W2 W3 W4 W5 W6 W7 | Patterns; read every visible string | Plain, specific, no exclamation marks; brand casing (X8) |
+| 5. Type | T1 T2 T3 T4 T5 T6 | Patterns; `inventory` font sizes; § 2 above | Brand type scale, Sora tabular figures (X7, X9) |
+| 6. Layout | L1 L2 L5 L6 L7 L9 P1 P2 P3 P4 | Patterns for L1, L7; eye; template check | Composition rules in passes.md § 6 |
+| 7. Details | K1 K2 K3 K4 K5 K6 K7 K8 K9 | Patterns; § 5 above for hierarchy | Radii from the brand (X6), kit icon (X3) |
+| 8. Visuals | V1 V2 V3 V4 V5 | Eye on the screenshots | [unslop/visuals.md](unslop/visuals.md); paid generation is a stop (X11) |
+| 9. Motion | M1 M2 M3 M4 M5 L3 L4 L8 | Patterns; [motion-checks.md](motion-checks.md) | Brand motion tokens; no looping, no `transition-all` |
+
+Every ID in signs.md appears in this table once; the `/code` design lens (`~/.claude/agents/references/lenses/design.md`
+§ UI slop) runs the same patterns on a diff.
+
 ## See → do
 
 | You see | You do |

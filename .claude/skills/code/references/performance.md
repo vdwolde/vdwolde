@@ -21,7 +21,8 @@ Optional profilers (a Node CPU profile, `py-spy`, `dotnet-trace`) are named in t
 a finding; none is installed without asking.
 
 `run prep` runs `prefilter <scope> --mode performance` for leads. On `--all`, the shards come riskiest first (recent churn,
-fix commits, size): start there. If `.claude/REVIEW.md` has `## Performance budgets`, pass them: findings are
+fix commits, size): start there. For a web front end, name the page's likely LCP element in the brief when you
+know it (the lens checks its loading priority against `platform-native.md` § Legacy web patterns). If `.claude/REVIEW.md` has `## Performance budgets`, pass them: findings are
 judged against the project's own numbers.
 
 ## Report emphasis

@@ -18,7 +18,10 @@ cases. **Name the simpler form that does the same job.** Tag each finding on thi
 - `delete:` dead code or a speculative feature (the replacement is nothing).
 - `stdlib:` a hand-rolled thing the standard library ships (name the function).
 - `native:` code or a dependency doing what the platform already does (name the feature; read
-  `~/.claude/agents/references/platform-native.md` when you tag one, not up front).
+  `~/.claude/agents/references/platform-native.md` when you tag one, not up front). When the scope holds
+  HTML, CSS or client-side JS, also walk that file's **Legacy web patterns** table over it: each hit is a
+  `native:` finding that names the replacement and, for a feature newer than the project's browser target, the
+  fallback. Its Rules of use set the wording and the severity.
 - `yagni:` an abstraction with one implementation, a config nobody sets, a layer with one caller.
 - `shrink:` the same logic in fewer lines (show the shorter form).
 
@@ -49,6 +52,22 @@ references outside the definition is a candidate, not proof; with the `LSP` tool
 layering that the docs describe but the code does not follow. Report the boundary or cycle, not a refactor
 plan. The brief may carry `dependents` output: a changed or existing file with **no importers** is a dead-code
 candidate (check dynamic imports, entry points, reflection and config-registered names before reporting it).
+
+## UI slop
+
+**Only when the scope holds UI files** (`*.tsx`, `*.jsx`, `*.html`, `*.css`, `*.vue`, `*.svelte`, or XAML; never
+vendored `components/ui/*`, `node_modules` or generated files). Read
+`~/.claude/skills/design/references/unslop/signs.md` and run each row's "Find it" pattern with `Grep` over those
+files; every hit is a candidate, read the line before reporting it. In a vdWolde project (any project under the
+Development Base unless its docs say otherwise) read `unslop/conflicts.md` first: its rows are the brand's own
+choices (the one backlight, the mark's glow, the signal, Title Case, the brand tokens) and are never findings.
+
+Report every sign found, one line each: `path:line — UI slop <ID> <sign> — <fix>`. The fix names the brand's own
+value where the brand owns it (a token from `tokens.css`, the brand radius, the motion token, Sora tabular figures),
+never Unslop's default and never a new colour, font or radius. Severity: Suggested, except a sign on the primary
+action or first screen (C1, C2, C3, I1, W1, L4, M1), which is Important. A sign the project lists under Excluded
+items in `.claude/REVIEW.md` by its ID is not reported. The "eye" rows need screenshots, which this lens does not
+have: list them under `Not checked`, never guess.
 
 ## Dependency hygiene
 
